@@ -1,5 +1,5 @@
 window.onload = function() {
-    if (window.location.href.indexOf('scan.html') > -1 || window.location.href.indexOf('navscan.html') > -1) {
+    if (window.location.href.indexOf('scan.html') > -1 || window.location.href.indexOf('index.html') > -1) {
         scanner();
     };
 
