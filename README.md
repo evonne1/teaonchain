@@ -35,8 +35,8 @@ command to run if program contains helper info
 
 ## Authors
 
-Project owner, Blockchain development: Jules Repusseau
-UX/UI: Evonne Chen
+* Project owner, Blockchain development: Jules Repusseau
+* UX/UI: Evonne Chen
 
 ## Version History
 
