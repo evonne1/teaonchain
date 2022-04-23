@@ -345,6 +345,8 @@ function returnAsset(assetid, imgid, textid) {
         '<tr><td> Quantity </td><td>' + ascntr.onchain_metadata.harvestingQuantity + ascntr.onchain_metadata.harvestingQuantityUnit + '</td></tr>'
     document.getElementById(textid).appendChild(table);
 
+    var tit = document.getElementById("title");
+tit.innerText= ascntr.onchain_metadata.name;
     //Then we retrieve certification data
 
     var xtv = new XMLHttpRequest();
