@@ -379,6 +379,7 @@ tit.innerText= ascntr.onchain_metadata.name;
     document.getElementById("certInfo").appendChild(table);
 
 
+
     var xte = new XMLHttpRequest();
     xte.open("GET", 'https://cardano-mainnet.blockfrost.io/api/v0/txs/' + ascntr.onchain_metadata.derivesFromTx + '/metadata', false); // false for synchronous request
     xte.setRequestHeader("project_id", 'mainnetfXjRIYdCo4FNIxJ15AgCSxLxjLLxZPag');
