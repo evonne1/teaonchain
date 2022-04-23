@@ -34,26 +34,11 @@
     <!-- search list -->
     <div id="app" class="searchList" onclick="closeNav()">
       <ul class="list-group">
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
+        <a href="navdetail.html" onclick="getvalue()" data-myval="d47473f7409c360c3daa7772c1fd1a2e12b67350b0a6a2d7fe3b2224484f4e474348414c45415645533034323032303232" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
         </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
+        <a href="navdetail.html" onclick="getvalue()" data-myval="d47473f7409c360c3daa7772c1fd1a2e12b67350b0a6a2d7fe3b2224444f4e4746414e474d454952454e4c45415645533034303632303232" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
         </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
-        <a href="navdetail.html" class="list-group-item list-group-item-action flex-column align-items-start">tea <i style='color:grey' class="bi bi-chevron-right float-right"></i>
-        </a>
+       
       </ul>
     </div>
     
@@ -85,5 +70,17 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
     <script src="js/tea.js"></script>
+    <script>
+    var listItems = document.querySelectorAll("ul a");
+
+    listItems.forEach(function(item) {
+      item.onclick = function(e) {
+        localStorage.setItem("favoriteAsset", this.dataset.myval);
+        alert(localStorage.getItem("favoriteAsset"));
+
+      }
+    });
+</script>
+
   </body>
 </html>

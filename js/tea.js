@@ -10,6 +10,7 @@ window.onload = function() {
 
 };
 
+
 // scanner
 function scanner() {
     var scanner = new Instascan.Scanner({
@@ -74,6 +75,11 @@ function closeNav() {
 }
 
 
+var assetName= "d47473f7409c360c3daa7772c1fd1a2e12b67350b0a6a2d7fe3b2224484f4e474348414c45415645533034323032303232";
+
+
+
+
 function returnTxAsset(assetidt) {
     var xtp = new XMLHttpRequest();
 
@@ -87,8 +93,13 @@ function returnTxAsset(assetidt) {
     
     var dateArray =[], 
     FromAddressArray =[], 
-    ToAddressArray=[]; 
-    contentt.forEach((element) =>{
+    ToAddressArray=[], 
+    metatext =[]; 
+
+    contentt.forEach((element,index) =>{
+
+        if (index < 4) 
+        {
 
         var xts = new XMLHttpRequest();
         xts.open("GET", 'https://cardano-mainnet.blockfrost.io/api/v0/txs/' + element, false); // false for synchronous request
@@ -103,7 +114,31 @@ function returnTxAsset(assetidt) {
         FromAddressArray.push(stakeAddressMatch(returnStake(infoTx[0]))) ;
         ToAddressArray.push(stakeAddressMatch(returnStake(infoTx[1]))); 
 
-    })
+        var xtpr = new XMLHttpRequest(); 
+    xtpr.open("GET", 'https://cardano-mainnet.blockfrost.io/api/v0/txs/' + element + '/metadata', false); // false for synchronous request
+    xtpr.setRequestHeader("project_id", 'mainnetfXjRIYdCo4FNIxJ15AgCSxLxjLLxZPag');
+    xtpr.send(null)
+
+
+
+    try
+    {
+    var textpr = JSON.parse((xtpr.responseText).replace('[', '').replace(']', '').replace('[', '').replace(']', ''));
+    metatext.push(textpr.json_metadata.msg);
+    }
+    catch
+    {
+     metatext.push("");
+    }
+
+
+        }
+}
+    )
+
+    
+
+
 
 
 /*
@@ -190,19 +225,22 @@ FromAddressArray.forEach((element,index) => {
 var Arraygroup = [group0,group1,group2,group3]
 
 
+
 Arraygroup.forEach((element,index) => {
  
     let newSelect=document.createElement('select');
-
+   newSelect.id="type"+index;
   
-      element.forEach(ele =>{
-    var optn = ele;
-    var el = document.createElement("option");
+    //  element.forEach(ele =>{
+    let optn = element[0];
+    let el = document.createElement("option");
    // el.setAttribute("data-input", FromAddress);
    // el.setAttribute("data-output", ToAddress);
     el.textContent = optn;
-    el.value = optn;
-    newSelect.appendChild(el);})
+   el.value="item"+index;
+    // el.value = optn;
+    newSelect.appendChild(el);
+//})
 
 
   
@@ -210,24 +248,32 @@ Arraygroup.forEach((element,index) => {
    // traceEvent.append(link);
   //  traceEvent.append(li1);
     })
-
 */
 
 
+
+
 dateArray.forEach((element,index) => {
+
+   
     let li1 = document.createElement('li');
     li1.setAttribute("data-date", element.toLocaleDateString("en-US", options));
     li1.setAttribute("class", "event")
-    let newSelect=document.createElement('select');
+    li1.innerHTML = "<p>"+FromAddressArray[index].slice(0,15)+">"+ToAddressArray[index].slice(0,15)+"</p>"+" <h3> " + metadataex[index] + " <a href='https://cardanoscan.io/transaction/"+contentt[index]+"' target='blank'> ></a></h3>"+
+  "<p>"+metatext[index]+"</p>";
 
-  let link =document.createElement('a');
+
+ /* let link =document.createElement('a');
    link.href= "https://cardanoscan.io/transaction/"+contentt[index];
     link.target="_blank";
-    link.innerText=" > ";
-     
-    li1.innerHTML = " <h3> " + metadataex[index] + "</h3></br><p>"+FromAddressArray[index]+">"+ToAddressArray[index]+"</p>";
-let test = [contentt[index].slice(0,9)+"...","test"];
+    link.innerText=" > ";*/
 
+    
+     
+
+
+
+/*
 for (var i = 0; i < test.length; i++) {
     var optn = test[i];
     var el = document.createElement("option");
@@ -236,14 +282,21 @@ for (var i = 0; i < test.length; i++) {
     el.textContent = optn;
     el.value = optn;
     newSelect.appendChild(el);
-} 
+} */
+
+/*let newSelect=document.createElement('button');
+newSelect.type= "button";
+newSelect.setAttribute("class", "btn btn-success");
+newSelect.innerText=ToAddressArray[index].slice(0,15);
 
 
-  
-    traceEvent.append(newSelect);
-    traceEvent.append(link);
-    traceEvent.append(li1);
-    })
+
+    traceEvent.append(newSelect);*/
+    traceEvent.append(li1); 
+   // traceEvent.append(link);
+
+    
+  }  )
 
    /* var li2 = document.createElement('li');
     li2.setAttribute("data-date", dd1.toLocaleDateString("en-US", options))
@@ -450,3 +503,4 @@ function stakeAddressMatch(adr)
     }
     return test; 
 }
+
